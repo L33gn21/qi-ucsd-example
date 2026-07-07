@@ -1,0 +1,185 @@
+:root {
+  --taco-orange: #ff6b35;
+  --taco-red: #c1121f;
+  --taco-cream: #fff8f0;
+  --taco-dark: #2b1c14;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--taco-dark);
+  background: var(--taco-cream);
+  line-height: 1.6;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--taco-red), var(--taco-orange));
+  color: white;
+  padding-bottom: 4rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.nav-cta {
+  color: white;
+  text-decoration: none;
+  border: 2px solid white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-cta:hover {
+  background: white;
+  color: var(--taco-red);
+}
+
+.hero-content {
+  text-align: center;
+  padding: 3rem 1.5rem 0;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero-content h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: white;
+  color: var(--taco-red);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0.8rem 2rem;
+  border-radius: 999px;
+  transition: transform 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3.5rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.highlight {
+  flex: 1 1 220px;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.highlight .icon {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.highlight h3 {
+  margin-bottom: 0.5rem;
+  color: var(--taco-red);
+}
+
+.menu {
+  background: white;
+  padding: 3.5rem 2rem;
+  text-align: center;
+}
+
+.menu h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--taco-red);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.menu-item {
+  background: var(--taco-cream);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.menu-item h4 {
+  color: var(--taco-dark);
+  margin-bottom: 0.4rem;
+}
+
+.menu-item p {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin-bottom: 0.6rem;
+}
+
+.price {
+  font-weight: 700;
+  color: var(--taco-orange);
+}
+
+.location {
+  text-align: center;
+  padding: 3.5rem 2rem;
+}
+
+.location h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--taco-red);
+}
+
+.location p {
+  margin-bottom: 0.3rem;
+}
+
+.location .btn-primary {
+  margin-top: 1.5rem;
+  background: var(--taco-red);
+  color: white;
+}
+
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--taco-dark);
+  color: white;
+  font-size: 0.9rem;
+}
