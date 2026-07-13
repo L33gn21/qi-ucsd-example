@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VoxShield — 신뢰도 기반 음성 사기 스크리닝</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="badge">Decision-Support Tool</span>
+      <h1>VoxShield</h1>
+      <p>신뢰도 기반 음성 사기 스크리닝 시스템 — 합성음 탐지 후, 사람 음성일 때만 억양을 추정합니다.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="upload-card">
+      <h2>1. 음성 업로드</h2>
+      <label id="dropzone" class="dropzone" for="audioInput">
+        <input id="audioInput" type="file" accept="audio/*" hidden />
+        <div class="dropzone-content">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 19h14" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p><strong>클릭하거나 파일을 드래그하세요</strong></p>
+          <p class="hint">WAV, MP3, M4A 등 오디오 파일 (최대 25MB)</p>
+        </div>
+      </label>
+      <div id="fileInfo" class="file-info hidden"></div>
+      <button id="analyzeBtn" class="primary-btn" disabled>분석 시작</button>
+      <p id="errorMsg" class="error hidden"></p>
+    </section>
+
+    <section id="pipeline" class="pipeline hidden">
+      <h2>2. 처리 파이프라인</h2>
+      <ol class="steps">
+        <li id="step-0" class="step"><span class="step-index">0</span><span class="step-label">전처리 (16kHz · 8초 · 로그 Mel 스펙트로그램)</span><span class="step-status"></span></li>
+        <li id="step-1" class="step"><span class="step-index">1</span><span class="step-label">합성음 탐지 (ResNet18)</span><span class="step-status"></span></li>
+        <li id="step-2" class="step"><span class="step-index">2</span><span class="step-label">억양 추정 (Wav2Vec2-base)</span><span class="step-status"></span></li>
+        <li id="step-3" class="step"><span class="step-index">3</span><span class="step-label">리포트 생성</span><span class="step-status"></span></li>
+      </ol>
+    </section>
+
+    <section id="report" class="report hidden">
+      <h2>3. 스크리닝 리포트</h2>
+      <div class="report-grid">
+        <div class="report-card verdict-card">
+          <span class="card-label">판정 결과</span>
+          <div id="verdictBadge" class="verdict-badge">-</div>
+          <div class="confidence-row">
+            <span>신뢰도</span>
+            <div class="confidence-bar"><div id="voiceConfidenceFill" class="confidence-fill"></div></div>
+            <span id="voiceConfidenceLabel">-</span>
+          </div>
+        </div>
+
+        <div class="report-card risk-card">
+          <span class="card-label">위험도</span>
+          <div id="riskBadge" class="risk-badge">-</div>
+          <p id="reviewFlag" class="review-flag hidden">⚠ 경계 사례 — 사람 검토 필요</p>
+        </div>
+
+        <div id="accentCard" class="report-card accent-card hidden">
+          <span class="card-label">억양 추정</span>
+          <div id="accentPredicted" class="accent-predicted">-</div>
+          <div id="accentDistribution" class="accent-distribution"></div>
+        </div>
+
+        <div class="report-card meta-card">
+          <span class="card-label">메타데이터</span>
+          <ul id="metaList" class="meta-list"></ul>
+        </div>
+      </div>
+      <p class="disclaimer">VoxShield는 최종 판단자가 아닌 조사자를 돕는 의사결정 지원 도구입니다. 출력은 확률 분포이며 신원 주장이 아닙니다.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>VoxShield · 합성음 탐지 + 억양 추정 파이프라인 (모델은 데모용 mock)</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
