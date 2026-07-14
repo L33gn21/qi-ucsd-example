@@ -1,0 +1,34 @@
+databases:
+  - name: voxshield-db
+    plan: free
+    databaseName: voxshield
+    user: voxshield
+
+services:
+  - type: web
+    name: voxshield-backend
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: voxshield-db
+          property: connectionString
+      - key: PORT
+        value: 4000
+
+  - type: web
+    name: voxshield-frontend
+    runtime: node
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 5173
+      - key: BACKEND_URL
+        sync: false # fill in with the voxshield-backend service URL after first deploy, e.g. https://voxshield-backend.onrender.com

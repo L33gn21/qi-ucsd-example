@@ -43,13 +43,24 @@ body {
 
 .container { max-width: 720px; margin: 0 auto; padding: 0 24px 64px; }
 
-.upload-card, .pipeline, .report {
+.upload-card, .pipeline, .report, .history {
   background: var(--panel);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius);
   padding: 28px;
   margin-bottom: 24px;
 }
+
+.history-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.history-table th, .history-table td {
+  text-align: left;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--panel-border);
+  color: var(--text);
+  white-space: nowrap;
+}
+.history-table th { color: var(--text-dim); font-weight: 600; }
+.history-table td:nth-child(2) { white-space: normal; }
 
 h2 { font-size: 16px; margin: 0 0 18px; color: var(--text-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
 

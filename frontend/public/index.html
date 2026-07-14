@@ -75,12 +75,32 @@
       </div>
       <p class="disclaimer">VoxShield는 최종 판단자가 아닌 조사자를 돕는 의사결정 지원 도구입니다. 출력은 확률 분포이며 신원 주장이 아닙니다.</p>
     </section>
+
+    <section id="history" class="history">
+      <h2>4. 최근 분석 이력 (PostgreSQL)</h2>
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>시각</th>
+            <th>파일명</th>
+            <th>판정</th>
+            <th>신뢰도</th>
+            <th>억양</th>
+            <th>위험도</th>
+            <th>검토</th>
+          </tr>
+        </thead>
+        <tbody id="historyBody"></tbody>
+      </table>
+      <p id="historyEmpty" class="hint hidden">아직 저장된 이력이 없습니다.</p>
+    </section>
   </main>
 
   <footer class="footer">
     <p>VoxShield · 합성음 탐지 + 억양 추정 파이프라인 (모델은 데모용 mock)</p>
   </footer>
 
+  <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

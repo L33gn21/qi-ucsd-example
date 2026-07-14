@@ -1,6 +1,8 @@
-const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-  ? "http://localhost:4000"
-  : "";
+const API_BASE = window.API_BASE !== undefined && window.API_BASE !== ""
+  ? window.API_BASE
+  : (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+      ? "http://localhost:4000"
+      : "");
 
 const dropzone = document.getElementById("dropzone");
 const audioInput = document.getElementById("audioInput");
@@ -157,6 +159,41 @@ function renderReport(report) {
   reportSection.classList.remove("hidden");
 }
 
+const historyBody = document.getElementById("historyBody");
+const historyEmpty = document.getElementById("historyEmpty");
+
+function renderHistory(items) {
+  historyBody.innerHTML = "";
+  historyEmpty.classList.toggle("hidden", items.length > 0);
+  const riskKo = { low: "낮음", medium: "중간", high: "높음" };
+  items.forEach((item) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${new Date(item.analyzed_at).toLocaleString("ko-KR")}</td>
+      <td>${item.file_name}</td>
+      <td>${item.voice_type === "human" ? "사람 음성" : "합성음"}</td>
+      <td>${Math.round(item.voice_type_confidence * 100)}%</td>
+      <td>${item.accent || "-"}</td>
+      <td><span class="risk-badge ${item.risk_level}">${riskKo[item.risk_level]}</span></td>
+      <td>${item.needs_human_review ? "⚠" : ""}</td>
+    `;
+    historyBody.appendChild(tr);
+  });
+}
+
+async function loadHistory() {
+  try {
+    const res = await fetch(`${API_BASE}/api/history`);
+    if (!res.ok) return;
+    const { items } = await res.json();
+    renderHistory(items);
+  } catch (err) {
+    // history is best-effort; ignore failures silently
+  }
+}
+
+loadHistory();
+
 analyzeBtn.addEventListener("click", async () => {
   if (!selectedFile) return;
   showError("");
@@ -179,6 +216,7 @@ analyzeBtn.addEventListener("click", async () => {
     const report = await res.json();
     await animatePipeline(report);
     renderReport(report);
+    loadHistory();
   } catch (err) {
     showError(err.message || "분석 중 오류가 발생했습니다.");
   } finally {
