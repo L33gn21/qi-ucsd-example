@@ -1,4 +1,0 @@
-curl -X GET \
-     "https://datasets-server.huggingface.co/first-rows?dataset=Bisher%2FASVspoof_2021_DF&config=default&split=train"
-
-  https://huggingface.co/datasets/Bisher/ASVspoof_2021_DF/viewer

@@ -1,0 +1,5 @@
+from datasets import load_dataset
+
+ds = load_dataset("Bisher/ASVspoof_2019_LA")
+
+https://huggingface.co/datasets/Bisher/ASVspoof_2019_LA
